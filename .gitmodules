@@ -1,0 +1,30 @@
+[submodule "modules/mmm"]
+	path = modules/mmm
+	url = git@github.com:olindata/puppet-mmm.git
+[submodule "modules/puppet"]
+	path = modules/puppet
+	url = git@github.com:olindata/puppetlabs-puppet.git
+[submodule "modules/inifile"]
+	path = modules/inifile
+	url = git@github.com:olindata/puppetlabs-inifile.git
+[submodule "modules/apache"]
+	path = modules/apache
+	url = git@github.com:olindata/puppetlabs-apache.git
+[submodule "modules/stdlib"]
+	path = modules/stdlib
+	url = git@github.com:olindata/puppetlabs-stdlib.git
+[submodule "modules/concat"]
+	path = modules/concat
+	url = git@github.com:olindata/puppet-concat.git
+[submodule "modules/puppetdb"]
+	path = modules/puppetdb
+	url = git@github.com:olindata/puppetlabs-puppetdb.git
+[submodule "modules/postgresql"]
+	path = modules/postgresql
+	url = git@github.com:olindata/puppet-postgresql.git
+[submodule "modules/firewall"]
+	path = modules/firewall
+	url = git@github.com:olindata/puppetlabs-firewall.git
+[submodule "modules/apt"]
+	path = modules/apt
+	url = git@github.com:olindata/puppetlabs-apt.git
