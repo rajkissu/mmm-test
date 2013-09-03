@@ -28,3 +28,6 @@
 [submodule "modules/apt"]
 	path = modules/apt
 	url = git@github.com:olindata/puppetlabs-apt.git
+[submodule "modules/mysql"]
+	path = modules/mysql
+	url = git@github.com:olindata/puppetlabs-mysql.git

@@ -1,28 +1,24 @@
 class s_master {
-  # update apt repository
-  @exec { 'apt-get update':
-    command => '/usr/bin/apt-get update',
-    tag     => update,
+  include s_apt
+  include puppetdb
+
+  class { 'puppet::master':
+    version                  => '3.2.4-1puppetlabs1',
+    modulepath               => '/etc/puppet/modules:/etc/puppet/services',
+    storeconfigs             => true,
+    puppetdb_startup_timeout => '120',
   }
 
   # run SSL configuration
-  @exec { 'puppetdb-ssl-setup':
-    command => '/usr/sbin/puppetdb-ssl-setup',
-    creates => '/etc/puppetdb/ssl',
-    tag     => puppetdb,
+  exec { 'puppetdb-ssl-setup':
+    path    => '/usr/sbin:/usr/bin:/bin',
+    creates => [
+      '/etc/puppetdb/ssl/private.pem',
+      '/etc/puppetdb/ssl/public.pem',
+      '/etc/puppetdb/ssl/ca.pem',
+      ],
   }
-
-  class { 'apache': }
-  class { 'puppet::master':
-    version => '3.1.0-1puppetlabs1',
-  }
-
-  class { 'puppetdb': }
-  class { 'puppetdb::master::config': }
-
-  # update apt repos before installing any packages
-  Exec <| tag == 'update' |> -> Package <| |>
 
   # run ssl config script before setting up puppetdb on puppetmaster
-  Class['puppetdb'] -> Exec <| tag == 'puppetdb' |> -> Class['puppetdb::master::config']
+  Exec['Certificate_Check'] -> Exec['puppetdb-ssl-setup'] -> Class['puppetdb::master::config']
 }
