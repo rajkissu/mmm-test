@@ -4,7 +4,6 @@ class s_mmm::agent($clustername) {
 
   # configure the cluster for this node
   s_mmm::cluster { "mmm_cluster_${clustername}":
-    mmm_type    => 'agent',
     clustername => $clustername
   }
 }

@@ -1,7 +1,6 @@
 $mmm_multi_cluster_monitor = true
-$localsubnet = 'localhost'
 
-node baseagent {
+node base {
   include s_agent
 
   @@host { $::fqdn:
@@ -16,9 +15,11 @@ node baseagent {
 node "puppet.lan", "puppet" {
   include s_agent
   include s_master
+
+  Host <<||>>
 }
 
-node "monitor.lan" inherits baseagent {
+node "monitor.lan" inherits base {
   include mmm::monitor
 
   s_mmm::monitor { 'linkorb-m1':
@@ -26,7 +27,7 @@ node "monitor.lan" inherits baseagent {
   }
 }
 
-node /agent\d.lan/ inherits baseagent {
+node /agent\d.lan/ inherits base {
   class { "s_mmm::agent":
     clustername => 'linkorb-m1',
   }
