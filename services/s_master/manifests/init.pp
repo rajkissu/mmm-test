@@ -3,7 +3,7 @@ class s_master {
   include puppetdb
 
   class { 'puppet::master':
-    version                  => '3.2.4-1puppetlabs1',
+    version                  => '3.3.0-1puppetlabs1',
     modulepath               => '/etc/puppet/modules:/etc/puppet/services',
     storeconfigs             => true,
     puppetdb_startup_timeout => '120',

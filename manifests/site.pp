@@ -1,5 +1,3 @@
-$mmm_multi_cluster_monitor = true
-
 node base {
   include s_agent
 
@@ -15,20 +13,17 @@ node base {
 node "puppet.lan", "puppet" {
   include s_agent
   include s_master
+  include s_master::hiera
 
   Host <<||>>
 }
 
 node "monitor.lan" inherits base {
   include mmm::monitor
-
-  s_mmm::monitor { 'linkorb-m1':
-    clustername => 'linkorb-m1',
-  }
+  include s_mmm::cluster
 }
 
 node /agent\d.lan/ inherits base {
-  class { "s_mmm::agent":
-    clustername => 'linkorb-m1',
-  }
+  include mmm::agent
+  include s_mmm::cluster
 }

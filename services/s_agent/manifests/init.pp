@@ -3,7 +3,7 @@ class s_agent {
 
   # set up puppet agent
   class { 'puppet::agent':
-    version       => '3.2.4-1puppetlabs1',
+    version       => '3.3.0-1puppetlabs1',
     puppet_server => 'puppet.lan',
     splay         => true,
   }
